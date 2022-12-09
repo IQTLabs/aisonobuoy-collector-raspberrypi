@@ -1,0 +1,19 @@
+version: "3"
+services:
+  s3-upload:
+    image: iqtlabs/pibackbone-s3-upload:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    networks:
+      - pibackbone
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+      - "S3_BUCKET=${S3_BUCKET}"
+    volumes:
+      - "/flash/telemetry:/flash/telemetry"
+      - "/flash/s3:/flash/s3"
+      - $HOME/.aws:/root/.aws:ro
+networks:
+    pibackbone:
+      driver: bridge
+      driver_opts:
+        com.docker.network.driver.mtu: 900

@@ -1,0 +1,20 @@
+version: "3"
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: always
+    networks:
+      - pibackbone
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - "WATCHTOWER_POLL_INTERVAL=3600"
+      - "WATCHTOWER_CLEANUP=true"
+      - "WATCHTOWER_INCLUDE_RESTARTING=true"
+      - "WATCHTOWER_INCLUDE_STOPPED=true"
+      - "WATCHTOWER_REVIVE_STOPPED=true"
+networks:
+    pibackbone:
+      driver: bridge
+      driver_opts:
+        com.docker.network.driver.mtu: 900

@@ -1,0 +1,15 @@
+version: "3"
+services:
+  pijuice:
+    image: iqtlabs/pibackbone-pijuice:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    network_mode: "none"
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+    volumes:
+      - "/flash/telemetry/power:/flash/telemetry/power"
+      - "/var/lib/pijuice:/var/lib/pijuice"
+      - "/var/run:/var/run"
+      - "/home/pi:/home/pi"
+    devices:
+      - "/dev/i2c-1:/dev/i2c-1"

@@ -1,0 +1,4 @@
+# every five minutes
+*/5 * * * * root /opt/pibackbone/scripts/system_health.sh
+# every minute check if need to shutdown
+* * * * * root /opt/pibackbone/scripts/shutdown.sh

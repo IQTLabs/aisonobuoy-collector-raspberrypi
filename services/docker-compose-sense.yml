@@ -1,0 +1,13 @@
+version: "3"
+services:
+  sense:
+    image: iqtlabs/pibackbone-sense:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    network_mode: "none"
+    privileged: true
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+    volumes:
+      - "/flash/telemetry/sensors:/flash/telemetry/sensors"
+    devices:
+      - "/dev/i2c-1:/dev/i2c-1"

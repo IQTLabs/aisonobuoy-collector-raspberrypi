@@ -1,0 +1,12 @@
+version: "3"
+services:
+  daisy:
+    image: iqtlabs/pibackbone-daisy:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    network_mode: "none"
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+    volumes:
+      - "/flash/telemetry/ais:/flash/telemetry/ais"
+    devices:
+      - "/dev/serial0:/dev/serial0"

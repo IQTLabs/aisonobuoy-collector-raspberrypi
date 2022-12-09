@@ -1,0 +1,67 @@
+{
+  "services": {
+    "cell-sim7600g-h": {
+      "config": []
+    },
+    "compass": {
+      "config": []
+    },
+    "daisy": {
+      "config": [
+        "enable_uart=1",
+        "dtoverlay=disable-bt"
+      ],
+      "install": [
+        "wget https://github.com/itemir/rpi_boat_utils/raw/master/uart_control/uart_control",
+        "chmod +x ./uart_control",
+        "sudo ./uart_control gpio",
+        "sudo ln -s /dev/zero /dev/serial0"
+      ]
+    },
+    "environment-sensor": {
+      "config": []
+    },
+    "freespacer": {
+      "config": []
+    },
+    "hifiberry-dac-plus-adc-pro": {
+      "config": [
+        "dtoverlay=hifiberry-dacplusadcpro"
+      ]
+    },
+    "pijuice": {
+      "config": [
+        "dtoverlay=i2c-rtc,ds1339=1,addr=0x69"
+      ],
+      "install": [
+        "curl -LJO https://github.com/PiSupply/PiJuice/raw/master/Software/Install/pijuice-base_1.8_all.deb",
+        "sudo dpkg -i pijuice-base_1.8_all.deb"
+      ]
+    },
+    "s3-upload": {
+      "config": []
+    },
+    "sense": {
+      "config": [
+        "dtoverlay=rpi-sense"
+      ]
+    },
+    "status-updater": {
+      "config": []
+    }
+  },
+  "projects": {
+    "PiBuoy": {
+      "services": [
+        "cell-sim7600g-h",
+        "daisy",
+        "environment-sensor",
+        "hifiberry-dac-plus-adc-pro",
+        "pijuice",
+        "s3-upload",
+        "status-updater"
+      ],
+      "notes": "The PiJuice needs it's RTC I2C address changed from 68 to 69 in pijuice_cli to remove a conflict with the Environment Sensor HAT. Also ensure the Pijuice is running the latest firmware. The dAISy HAT needs pin 12 removed between it and the Pi to prevent conflicts created by the HiFiBerry HAT. The Cellular SIM7600G-H HAT should be attached only over USB to the Pi directly. Plug in the hydrophone to the HiFiBerry HAT prior to turning on for more reliable recording volume."
+    }
+  }
+}

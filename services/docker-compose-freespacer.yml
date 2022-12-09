@@ -1,0 +1,13 @@
+version: "3"
+services:
+  daisy:
+    image: iqtlabs/pibackbone-freespacer:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    network_mode: "none"
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+    command:
+      - "/flash/telemetry"
+      - "90"
+    volumes:
+      - "/flash/telemetry:/flash/telemetry"

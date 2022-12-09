@@ -1,0 +1,17 @@
+version: "3"
+services:
+  cell-sim7600g-h:
+    image: iqtlabs/pibackbone-cell-sim7600g-h:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    network_mode: host
+    privileged: true
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+    volumes:
+      - "/flash/telemetry/gps:/flash/telemetry/gps"
+      - "/etc/resolv.conf:/etc/resolv.conf"
+      - "/sys:/sys"
+      - "/var/tmp:/var/tmp"
+    command:
+      - ${APN}
+      - ${GPS_CHECK}

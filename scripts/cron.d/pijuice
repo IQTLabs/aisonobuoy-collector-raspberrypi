@@ -1,0 +1,2 @@
+# every thirty minutes
+*/30 * * * * root systemctl restart pijuice.service

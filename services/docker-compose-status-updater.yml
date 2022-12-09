@@ -1,0 +1,20 @@
+version: "3"
+services:
+  status-updater:
+    image: iqtlabs/pibackbone-status-updater:${SERVICES_IMAGE_TAG:-stable}
+    restart: always
+    networks:
+      - pibackbone
+    environment:
+      - "HOSTNAME=${HOSTNAME}"
+      - "LOCATION=${LOCATION}"
+      - "WEBHOOK_URL=${WEBHOOK_URL}"
+      - "WEBHOOK_TOKEN=${WEBHOOK_TOKEN}"
+    volumes:
+      - "/flash:/flash"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+networks:
+    pibackbone:
+      driver: bridge
+      driver_opts:
+        com.docker.network.driver.mtu: 900

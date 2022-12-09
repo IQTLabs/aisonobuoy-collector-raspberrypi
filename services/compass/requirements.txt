@@ -1,0 +1,5 @@
+bjoern==3.2.2
+fake-rpi==0.7.1
+falcon==3.1.1
+falcon-cors==1.1.7
+smbus2==0.4.2
